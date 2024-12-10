@@ -1,5 +1,5 @@
 import './App.css';
-import {Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import {Navigate, RouterProvider,createHashRouter, redirect } from 'react-router-dom'
 import Layout from './Components/Layout/Layout'
 import Home from './Components/Home/Home'
 import Register from './Components/Register/Register'
@@ -34,9 +34,9 @@ import OnlinePayment from './Components/OnlinePayment/OnlinePayment'
 function App() {
   const queryClint = new QueryClient()
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {path:`` , element:<Layout/> , children: [
-    {path:`` , element: <Navigate to={`/home`} /> },
+    { index: true, loader: () => redirect("home") },
     {path:`home` , element:<ProtectedRoute><Home/></ProtectedRoute>},
     {path:`profile` , element: <ProtectedRoute><Profile/></ProtectedRoute> },
     {path:`onlinepayment` , element: <ProtectedRoute><OnlinePayment/></ProtectedRoute>},
